@@ -199,8 +199,8 @@ codeunit 50021 "MBS PV Prod Calculator"
         TopRisks."Due Date" := InputRow."Due Date";
         TopRisks."Planned Hours" := InputRow."Planned Hours";
         TopRisks."Spent Hours" := InputRow."Spent Hours";
-        // Earliest due date first: the date serial number is the ascending sort value.
-        TopRisks."Sort Amount" := InputRow."Due Date" - 0D;
+        // Earliest due date first: days since a fixed epoch (not 0D, which is not valid in date arithmetic) give the ascending sort value.
+        TopRisks."Sort Amount" := InputRow."Due Date" - DMY2Date(1, 1, 2000);
         TopRisks.Insert();
     end;
 
