@@ -12,7 +12,6 @@ using MBS.PrintVisPulse.Readers;
 page 50012 "MBS PV Prod Dashboard"
 {
     AdditionalSearchTerms = 'PrintVis, dashboard, pulse, Production';
-    Access = Internal;
     ApplicationArea = All;
     Caption = 'MBS PrintVis Production Dashboard';
     PageType = ListPlus;

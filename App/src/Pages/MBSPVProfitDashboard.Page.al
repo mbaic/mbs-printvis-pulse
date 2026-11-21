@@ -12,7 +12,6 @@ using MBS.PrintVisPulse.Readers;
 page 50013 "MBS PV Profit Dashboard"
 {
     AdditionalSearchTerms = 'PrintVis, dashboard, pulse, Profitability';
-    Access = Internal;
     ApplicationArea = All;
     Caption = 'MBS PrintVis Profitability Dashboard';
     PageType = ListPlus;

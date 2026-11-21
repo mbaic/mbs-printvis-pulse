@@ -8,7 +8,6 @@ using MBS.PrintVisPulse.Calculators;
 /// </summary>
 page 50014 "MBS PV KPI Cue Part"
 {
-    Access = Internal;
     ApplicationArea = All;
     Caption = 'KPIs';
     Editable = false;
@@ -104,7 +103,7 @@ page 50014 "MBS PV KPI Cue Part"
     end;
 
     /// <summary>Replaces the part's snapshot with the one built by the host. The part never reads shared globals.</summary>
-    procedure SetSnapshot(var Source: Record "MBS PV Snapshot Buffer" temporary)
+    internal procedure SetSnapshot(var Source: Record "MBS PV Snapshot Buffer" temporary)
     begin
         Rec.Reset();
         Rec.DeleteAll();

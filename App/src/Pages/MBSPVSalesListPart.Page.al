@@ -5,7 +5,6 @@ using MBS.PrintVisPulse.Readers;
 
 page 50015 "MBS PV Sales List Part"
 {
-    Access = Internal;
     ApplicationArea = All;
     Caption = 'Sales Exceptions';
     DeleteAllowed = false;
@@ -90,7 +89,7 @@ page 50015 "MBS PV Sales List Part"
         DrillDownMgt: Codeunit "MBS PV DrillDown Mgt.";
 
     /// <summary>Replaces all rows with the host's ranked exception rows.</summary>
-    procedure ReplaceRows(var Source: Record "MBS PV Open Quote Row" temporary)
+    internal procedure ReplaceRows(var Source: Record "MBS PV Open Quote Row" temporary)
     begin
         Rec.Reset();
         Rec.DeleteAll();

@@ -5,7 +5,6 @@ using MBS.PrintVisPulse.Readers;
 
 page 50017 "MBS PV Profit List Part"
 {
-    Access = Internal;
     ApplicationArea = All;
     Caption = 'Profitability Exceptions';
     DeleteAllowed = false;
@@ -90,7 +89,7 @@ page 50017 "MBS PV Profit List Part"
         DrillDownMgt: Codeunit "MBS PV DrillDown Mgt.";
 
     /// <summary>Replaces all rows with the host's ranked exception rows.</summary>
-    procedure ReplaceRows(var Source: Record "MBS PV Profit Overrun Row" temporary)
+    internal procedure ReplaceRows(var Source: Record "MBS PV Profit Overrun Row" temporary)
     begin
         Rec.Reset();
         Rec.DeleteAll();

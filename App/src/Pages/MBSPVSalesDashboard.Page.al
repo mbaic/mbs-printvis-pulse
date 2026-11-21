@@ -13,7 +13,6 @@ using Microsoft.Finance.GeneralLedger.Setup;
 page 50011 "MBS PV Sales Dashboard"
 {
     AdditionalSearchTerms = 'PrintVis, dashboard, pulse, Sales';
-    Access = Internal;
     ApplicationArea = All;
     Caption = 'MBS PrintVis Sales Dashboard';
     PageType = ListPlus;

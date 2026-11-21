@@ -8,7 +8,6 @@ page 50010 "MBS PV Pulse Role Center"
 {
     ApplicationArea = All;
     Caption = 'MBS PrintVis Pulse';
-    Access = Internal;
     PageType = RoleCenter;
 
     layout
