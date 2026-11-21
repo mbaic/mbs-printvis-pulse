@@ -1,10 +1,10 @@
 {
   "id": "adcbcd70-3554-414e-8fcd-a1079806c044",
-  "name": "App",
+  "name": "MBS PrintVis Pulse",
   "publisher": "MBS",
-  "version": "1.0.0.0",
-  "brief": "",
-  "description": "",
+  "version": "28.0.0.0",
+  "brief": "Native PrintVis dashboards for Business Central",
+  "description": "Native Business Central dashboards for PrintVis. Tracks quote pipeline, production pulse, and job profitability inside Business Central without Power BI.",
   "privacyStatement": "",
   "EULA": "",
   "help": "",
@@ -12,8 +12,10 @@
   "logo": "",
   "dependencies": [],
   "screenshots": [],
-  "platform": "1.0.0.0",
-  "application": "22.0.0.0",
+  "platform": "28.0.0.0",
+  "application": "28.0.0.0",
+  "runtime": "17.0",
+  "target": "Cloud",
   "idRanges": [
     {
       "from": 50000,
@@ -21,11 +23,19 @@
     }
   ],
   "features": [
-    "NoImplicitWith"
+    "NoImplicitWith",
+    "NoPromotedActionProperties"
   ],
   "resourceExposurePolicy": {
     "allowDebugging": true,
     "allowDownloadingSource": false,
     "includeSourceInSymbolFile": false
-  }
+  },
+  "internalsVisibleTo": [
+    {
+      "id": "7a5f5945-cfe1-4beb-bd85-80fef5ffa73e",
+      "name": "MBS PrintVis Pulse Test",
+      "publisher": "MBS"
+    }
+  ]
 }
