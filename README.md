@@ -12,6 +12,10 @@ PrintVis stores estimating, production, and job costing data in Business Central
 
 This app answers those questions inside Business Central with no external BI tool.
 
+![Sales dashboard mockup: three KPIs, open quote value by product group, and the top open quotes list](docs/mockups/01-sales-dashboard.png)
+
+*Mockup with sample data. See [`docs/mockups`](docs/mockups/README.md).*
+
 ## Why this matters
 
 - **Native Business Central UI:** dedicated searchable `ListPlus` dashboard pages, native KPIs, native exception lists, and one locally packaged vanilla-JS chart control add-in.
@@ -36,13 +40,19 @@ flowchart LR
 - Unverified KPIs display `Unavailable`. Undefined ratios display `N/A`.
 - Target: `Cloud` (SaaS), Business Central 28.0 or later (`runtime 17.0`).
 
+### Dashboards
+
+| Production | Profitability |
+|---|---|
+| [![Production dashboard mockup with on-time shipments, at-risk operations, planned vs. spent hours and the at-risk list](docs/mockups/02-production-dashboard.png)](docs/mockups/02-production-dashboard.html) | [![Profitability dashboard mockup with realized margin, cases over estimate, estimate vs. actual cost and the overrun list](docs/mockups/03-profitability-dashboard.png)](docs/mockups/03-profitability-dashboard.html) |
+
 ### PrintVis binding status
 
 The calculators, pages, chart, permission set, and tests are complete. The PrintVis data contract (gates G0.1 to G0.4 in the implementation specification) can only be verified against the target PrintVis `.app` symbols, which are not part of this repository. Until a verified binding handles the reader events (`OnReadSource` on codeunits 50030 to 50032 and `OnOpenCase` on codeunit 50033), every KPI shows `Unavailable` and `Open PrintVis Case` explains that the card is not verified. The app never shows an unverified number. See [`App/DATA-CONTRACT.md`](App/DATA-CONTRACT.md).
 
-## Mockups
+![Sales dashboard in the Unavailable state: every KPI shows Unavailable and the chart explains that PrintVis source data is unavailable](docs/mockups/04-unavailable-state.png)
 
-Illustrative dashboard mockups with sample data are in [`docs/mockups`](docs/mockups/README.md).
+*The state users see until a binding exists, or when a reader fails.*
 
 ## Demo steps
 
@@ -52,6 +62,10 @@ Illustrative dashboard mockups with sample data are in [`docs/mockups`](docs/moc
 2. Select a period filter and choose **Refresh**.
 3. Review the KPI values, the top-5 chart, and the top-10 exception list.
 4. Select an exception row and choose **Open PrintVis Case**.
+
+When the currency basis of open quotes is mixed or unverified, the value shows `N/A`, the chart carries the reason, and the list ranks by deadline:
+
+![Sales dashboard with mixed currency: Open Quote Value shows N/A and the list is titled Open Quotes by Deadline](docs/mockups/05-mixed-currency-state.png)
 
 ## What is intentionally simple
 

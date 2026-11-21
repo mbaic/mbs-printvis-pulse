@@ -10,6 +10,10 @@ Main Business Central Demo PTE for native PrintVis performance dashboards. Part 
 - **Pages (`50010..50017`):** an optional Role Center (`50010`) with declarative links, three searchable `ListPlus` dashboard hosts (`50011..50013`), the shared KPI `CardPart` (`50014`), and three exception `ListParts` (`50015..50017`).
 - **Access:** buffers, readers, runner, calculators, and pages are `Access = Internal` and exposed to `App.Test` through `internalsVisibleTo`.
 
+![Production dashboard mockup](../docs/mockups/02-production-dashboard.png)
+
+*Mockup with sample data: host page with period filter, KPI part, chart add-in and exception list part.*
+
 ### Object summary
 
 | Range | Area | Objects |
@@ -30,6 +34,10 @@ Main Business Central Demo PTE for native PrintVis performance dashboards. Part 
 | Sales | Current Open Quotes | Current Open Quote Value (`N/A` on mixed or unverified currency) | Quote Hit Rate % (`N/A` without decisions) |
 | Production | On-Time Shipments % (`Unavailable` until the promise field is named) | At-Risk Operations (caption falls back unless an operation-level due date is used) | In-Progress Operations |
 | Profitability | Realized Margin % (`N/A` when net sales are not positive) | Cases Over Estimate | Current WIP (`Unavailable` until verified) |
+
+![Profitability dashboard mockup](../docs/mockups/03-profitability-dashboard.png)
+
+*Profitability: WIP stays `Unavailable` until the binding verifies it.*
 
 ## Notes
 
