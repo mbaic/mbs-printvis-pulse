@@ -40,6 +40,10 @@ flowchart LR
 
 The calculators, pages, chart, permission set, and tests are complete. The PrintVis data contract (gates G0.1 to G0.4 in the implementation specification) can only be verified against the target PrintVis `.app` symbols, which are not part of this repository. Until a verified binding handles the reader events (`OnReadSource` on codeunits 50030 to 50032 and `OnOpenCase` on codeunit 50033), every KPI shows `Unavailable` and `Open PrintVis Case` explains that the card is not verified. The app never shows an unverified number. See [`App/DATA-CONTRACT.md`](App/DATA-CONTRACT.md).
 
+## Mockups
+
+Illustrative dashboard mockups with sample data are in [`docs/mockups`](docs/mockups/README.md).
+
 ## Demo steps
 
 **Prerequisites:** a Business Central 28.0 or later SaaS sandbox with `App` published and, for live data, a verified PrintVis binding.
@@ -70,7 +74,7 @@ The calculators, pages, chart, permission set, and tests are complete. The Print
 | [`App.Test`](App.Test/README.md) | MBS PrintVis Pulse Test | Unit tests against the production calculators | `50100..50199` |
 | [`LICENSE`](LICENSE) | MIT License | Repository license | n/a |
 
-Other folders: `.AL-Go/` and `.github/` hold the AL-Go settings and workflows. `.reference/` holds the implementation specification.
+Other folders: `.AL-Go/` and `.github/` hold the AL-Go settings and workflows. `docs/mockups/` holds dashboard mockups. `.reference/` holds the implementation specification.
 
 ## Notes
 

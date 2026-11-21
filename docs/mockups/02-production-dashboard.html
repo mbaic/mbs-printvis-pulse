@@ -1,0 +1,28 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MBS PrintVis Production Dashboard (mockup)</title><style>
+:root{--bg:#f5f5f5;--card:#fff;--text:#242424;--muted:#616161;--line:#e0e0e0;--accent:#0f6cbd;--s1:#0f6cbd;--s2:#ca5010;--warn:#b10e1c}
+@media (prefers-color-scheme: dark){:root{--bg:#1f1f1f;--card:#292929;--text:#f5f5f5;--muted:#adadad;--line:#3d3d3d;--accent:#479ef5;--s1:#479ef5;--s2:#f7630c;--warn:#f1707b}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px "Segoe UI",system-ui,sans-serif}
+.bar{background:var(--accent);color:#fff;padding:10px 20px;font-weight:600;display:flex;justify-content:space-between}
+.page{max-width:1100px;margin:0 auto;padding:16px 20px 32px}
+h1{font-size:20px;margin:8px 0 12px}
+.toolbar{display:flex;gap:16px;align-items:center;margin-bottom:12px;flex-wrap:wrap}
+.btn{background:var(--accent);color:#fff;border-radius:2px;padding:6px 14px;font-weight:600}
+.sel{border:1px solid var(--line);background:var(--card);padding:5px 10px;border-radius:2px}
+.meta{color:var(--muted);font-size:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:14px 16px;margin-bottom:14px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.kpi .cap{color:var(--muted);font-size:12px}.kpi .val{font-size:28px;font-weight:600;margin:4px 0}
+.kpi .note{color:var(--muted);font-size:12px}.na{color:var(--muted)}.un{color:var(--warn)}
+h2{font-size:14px;margin:0 0 10px}
+.row{display:grid;grid-template-columns:150px 1fr 90px;gap:12px;align-items:center;margin:7px 0}
+.bars>div{height:12px;border-radius:2px;margin:2px 0}.b1{background:var(--s1)}.b2{background:var(--s2)}
+.legend{color:var(--muted);font-size:12px;margin-bottom:8px}.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin:0 6px 0 12px}
+table{width:100%;border-collapse:collapse}th{text-align:left;color:var(--muted);font-weight:600;font-size:12px;border-bottom:1px solid var(--line);padding:6px 8px}
+td{padding:7px 8px;border-bottom:1px solid var(--line)}td.n,th.n{text-align:right}
+.empty{color:var(--muted);text-align:center;padding:30px 0}
+.banner{border-left:4px solid var(--accent);padding:6px 12px;margin-bottom:12px;color:var(--muted);font-size:12px}
+</style></head><body>
+<div class="bar"><span>Business Central</span><span>MBS PrintVis Pulse</span></div><div class="page"><h1>MBS PrintVis Production Dashboard</h1>
+
+<div class="toolbar"><span>Period</span><span class="sel">Last 30 Days ▾</span><span class="btn">Refresh</span><span class="meta">Generated 30 Jun 2026 12:00 · Business date 30 Jun 2026 · Period 1 Jun – 30 Jun 2026</span></div>
+<div class="kpis"><div class="card kpi"><div class="cap">On-Time Shipments %</div><div class="val ">87.5%</div><div class="note">Promise date field: Shipment Date Job.</div></div><div class="card kpi"><div class="cap">Incomplete Operations Near Requested Delivery</div><div class="val ">9</div><div class="note">Due date source: requested delivery date.</div></div><div class="card kpi"><div class="cap">In-Progress Operations</div><div class="val ">23</div><div class="note"></div></div></div><div class="card"><h2>Planned vs. Spent Hours by Capacity Unit</h2><div class="legend"><i style="background:var(--s1)"></i>Planned Hours<i style="background:var(--s2)"></i>Spent Hours</div><div class="row"><div>PRESS 1</div><div class="bars"><div class="b1" style="width:100%"></div><div class="b2" style="width:56%"></div></div><div class="meta">320 / 180</div></div><div class="row"><div>DIECUT 2</div><div class="bars"><div class="b1" style="width:75%"></div><div class="b2" style="width:30%"></div></div><div class="meta">240 / 95</div></div><div class="row"><div>FOLDER-GLUER</div><div class="bars"><div class="b1" style="width:56%"></div><div class="b2" style="width:19%"></div></div><div class="meta">180 / 60</div></div><div class="row"><div>PRESS 2</div><div class="bars"><div class="b1" style="width:50%"></div><div class="b2" style="width:34%"></div></div><div class="meta">160 / 110</div></div><div class="row"><div>BINDERY</div><div class="bars"><div class="b1" style="width:28%"></div><div class="b2" style="width:6%"></div></div><div class="meta">90 / 20</div></div></div><div class="card"><h2>Top At-Risk Operations by Due Date</h2><table><tr><th class="n">#</th><th class="">Case No.</th><th class="">Customer</th><th class="">Capacity Unit</th><th class="">Due Date</th><th class="n">Planned h</th><th class="n">Spent h</th></tr><tr><td class="n">1</td><td class="">C-20931</td><td class="">Vega Cosmetics</td><td class="">PRESS 1</td><td class="">2026-06-29</td><td class="n">16.0</td><td class="n">12.5</td></tr><tr><td class="n">2</td><td class="">C-20944</td><td class="">Alba Pharma</td><td class="">DIECUT 2</td><td class="">2026-06-30</td><td class="n">8.0</td><td class="n">0.0</td></tr><tr><td class="n">3</td><td class="">C-20950</td><td class="">Nordic Foods AB</td><td class="">FOLDER-GLUER</td><td class="">2026-07-01</td><td class="n">12.0</td><td class="n">3.5</td></tr><tr><td colspan="7" class="meta">Action: Open PrintVis Case (selected row)</td></tr></table></div></div></body></html>
