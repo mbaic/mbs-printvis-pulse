@@ -7,6 +7,9 @@
       "path": "App.Test"
     },
     {
+      "path": "App.Dataset"
+    },
+    {
       "path": ".AL-Go"
     }
   ],

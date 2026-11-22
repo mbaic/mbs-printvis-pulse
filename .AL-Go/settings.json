@@ -3,7 +3,8 @@
   "country": "us",
   "artifact": "////latest",
   "appFolders": [
-    "App"
+    "App",
+    "App.Dataset"
   ],
   "testFolders": [
     "App.Test"
