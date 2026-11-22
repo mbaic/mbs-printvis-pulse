@@ -13,7 +13,7 @@ Demo data for [MBS PrintVis Pulse](../README.md) so the three dashboards load on
 
 | PrintVis table | Rows | Feeds |
 |---|---|---|
-| `PVS Case` (6010312) | 14: 5 open quotes, 2 lost quotes, 4 closed and invoiced orders, 3 open orders | Open quotes and value, product-group chart, hit rate (6 won : 2 lost), closed cases, WIP |
+| `PVS Case` (6010312, incl. Quoted Sales Price) | 14: 5 open quotes, 2 lost quotes, 4 closed and invoiced orders, 3 open orders | Open quotes and value, product-group chart, hit rate (6 won : 2 lost), closed cases, WIP |
 | `PVS Job` (6010313) | 14, version 1 | Quoted price, net profit (estimate baseline) |
 | `PVS Job Planning Unit` (6010323) | 11 operations on offset press, digital press, die-cutter, guillotine, folder-gluer | At-risk and in-progress operations, planned vs. spent hours |
 | `PVS Job Costing Labor Entry` (6010325) | 1 per operation with spent hours | Labor hours |

@@ -201,6 +201,7 @@ codeunit 50202 "MBS PV Demo Data Mgt"
     local procedure CreateQuote(N: Integer; Customer: Text; JobName: Text; ProductGroup: Text; QuoteOffset: Integer; DeadlineOffset: Integer; Price: Decimal; EstimatedCost: Decimal)
     begin
         InsertCase(N, 1, Customer, JobName, ProductGroup, D(QuoteOffset), 0D, D(DeadlineOffset));
+        Writer.SetDec(155, Price); // Quoted Sales Price
         Writer.InsertAndLog();
         InsertJob(N, JobName, ProductGroup, Price, EstimatedCost, D(DeadlineOffset), false);
     end;
@@ -210,6 +211,7 @@ codeunit 50202 "MBS PV Demo Data Mgt"
         InsertCase(N, 1, Customer, JobName, ProductGroup, D(QuoteOffset), 0D, D(RejectOffset + 7));
         Writer.SetText(76, 'PRICE'); // Rejection Code
         Writer.SetDate(116, D(RejectOffset)); // Status Changed On
+        Writer.SetDec(155, Price); // Quoted Sales Price
         Writer.InsertAndLog();
         InsertJob(N, JobName, ProductGroup, Price, Round(Price * 0.7, 1), D(RejectOffset + 7), false);
     end;
@@ -217,6 +219,7 @@ codeunit 50202 "MBS PV Demo Data Mgt"
     local procedure CreateOrder(N: Integer; Customer: Text; JobName: Text; ProductGroup: Text; QuoteOffset: Integer; OrderOffset: Integer; DeadlineOffset: Integer; Closed: Boolean; Price: Decimal; EstimatedCost: Decimal; ActualCost: Decimal)
     begin
         InsertCase(N, 2, Customer, JobName, ProductGroup, D(QuoteOffset), D(OrderOffset), D(DeadlineOffset));
+        Writer.SetDec(155, Price); // Quoted Sales Price
         Writer.SetBool(16, not Closed); // Can Be Planned
         Writer.SetBool(19, not Closed); // WIP
         if Closed then begin
