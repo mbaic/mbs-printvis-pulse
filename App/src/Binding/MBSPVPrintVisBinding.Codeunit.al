@@ -58,8 +58,8 @@ codeunit 50035 "MBS PV PrintVis Binding"
         if not CaseRef.GetBySystemId(SourceSystemId) then
             exit;
         CaseRef.SetRecFilter();
-        // 6010326 = PVS Case Management, confirmed by Page Inspection. The list opens filtered to this single case.
-        Page.Run(6010326, CaseRef);
+        // 6010326 = PVS Case Management, confirmed by Page Inspection. The list opens filtered to this single case; RecordRef cannot be passed to Page.Run, so the web client URL is used.
+        Hyperlink(GetUrl(ClientType::Web, CompanyName(), ObjectType::Page, 6010326, CaseRef, true));
         IsHandled := true;
     end;
 
