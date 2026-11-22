@@ -2,6 +2,7 @@ namespace MBS.PrintVisPulse.Permissions;
 
 using MBS.PrintVisPulse.Buffers;
 using MBS.PrintVisPulse.Calculators;
+using MBS.PrintVisPulse.Diagnostics;
 using MBS.PrintVisPulse.Pages;
 using MBS.PrintVisPulse.Readers;
 
@@ -31,12 +32,18 @@ permissionset 50050 "MBS PV Pulse Users"
         page "MBS PV Sales List Part" = X,
         page "MBS PV Prod List Part" = X,
         page "MBS PV Profit List Part" = X,
+        page "MBS PV Sales Overview" = X,
+        page "MBS PV Prod Overview" = X,
+        page "MBS PV Profit Overview" = X,
+        page "MBS PV Data Info" = X,
         codeunit "MBS PV Sales Calculator" = X,
         codeunit "MBS PV Prod Calculator" = X,
         codeunit "MBS PV Profit Calculator" = X,
         codeunit "MBS PV Chart Json" = X,
         codeunit "MBS PV Period Mgt" = X,
         codeunit "MBS PV Display Mgt" = X,
+        codeunit "MBS PV Refresh Mgt" = X,
+        codeunit "MBS PV Data Info" = X,
         codeunit "MBS PV Sales Reader" = X,
         codeunit "MBS PV Prod Reader" = X,
         codeunit "MBS PV Profit Reader" = X,

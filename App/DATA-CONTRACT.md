@@ -11,6 +11,15 @@ Record the exact Business Central version and PrintVis version for every verific
 | G0.3 Semantics and drill-down | Lifecycle flags, version rules, date meanings, currency basis, additive cost entries, credit memo signs, Case Card page and access (E1, E2, E5, E6, S16) | Pending | | |
 | G0.4 Analysis fallback | `Internal` core tables: public analysis table fallback. No `powerbi` v2.0 objects (E3), no API page procedures (E4), `LoadData()` cost measured (E7) | Pending | | |
 
+## Facts confirmed so far
+
+| Fact | Source |
+| --- | --- |
+| `PVS Case` is table `6010312` | Page Inspection on the sandbox, 2026-11-22 |
+| The case list is page `6010326` `PVS Case Management` (List) | Page Inspection on the sandbox, 2026-11-22 |
+
+Use **Collect Data Info** (Role Center, dashboards, or Tell Me) to profile the PrintVis tables and record the results for G0.1 to G0.3. The report lists the installed PrintVis apps with versions, the table list, and per table the primary key, fields with types, date ranges, option and boolean value counts, and non-zero decimal ranges. It reads the first 3000 rows per table and writes nothing.
+
 ## Reader binding contract
 
 A binding subscribes to the reader events and must follow these rules:

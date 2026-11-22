@@ -3,7 +3,6 @@ namespace MBS.PrintVisPulse.Pages;
 using MBS.PrintVisPulse.Buffers;
 using MBS.PrintVisPulse.Calculators;
 using MBS.PrintVisPulse.Enums;
-using MBS.PrintVisPulse.Readers;
 
 /// <summary>
 /// Profitability dashboard host. Owns the period filter, the explicit Refresh action and the status header.
@@ -118,6 +117,17 @@ page 50013 "MBS PV Profit Dashboard"
                 end;
             }
         }
+        area(Navigation)
+        {
+            action(CollectDataInfo)
+            {
+                ApplicationArea = All;
+                Caption = 'Collect Data Info';
+                Image = Report;
+                RunObject = page "MBS PV Data Info";
+                ToolTip = 'Profiles the PrintVis tables and dates so the data can be checked against the dashboard rules.';
+            }
+        }
         area(Promoted)
         {
             actionref(Refresh_Promoted; Refresh)
@@ -139,29 +149,13 @@ page 50013 "MBS PV Profit Dashboard"
 
     local procedure RefreshDashboard()
     var
-        Runner: Codeunit "MBS PV Reader Runner";
-        PeriodMgt: Codeunit "MBS PV Period Mgt";
-        Calculator: Codeunit "MBS PV Profit Calculator";
-        InputRows: Record "MBS PV Profit Input Buffer" temporary;
+        RefreshMgt: Codeunit "MBS PV Refresh Mgt";
         Snapshot: Record "MBS PV Snapshot Buffer" temporary;
         TopOverruns: Record "MBS PV Profit Overrun Row" temporary;
         Groups: Record "MBS PV Chart Group Buffer" temporary;
-        StartedAt: DateTime;
-        BusinessDate: Date;
-        FromDate: Date;
-        ToDate: Date;
-        ElapsedMs: Integer;
-        RowsRead: Integer;
-        SourceAvailable: Boolean;
         ChartJson: Text;
-        WipVerified: Boolean;
     begin
-        StartedAt := CurrentDateTime();
-        BusinessDate := WorkDate();
-        PeriodMgt.GetRange(PeriodFilter, BusinessDate, FromDate, ToDate);
-
-        SourceAvailable := Runner.ReadProfitability(FromDate, ToDate, InputRows, WipVerified, RowsRead);
-        Calculator.Calculate(InputRows, FromDate, ToDate, BusinessDate, StartedAt, WipVerified, SourceAvailable, Snapshot, TopOverruns, Groups, ChartJson);
+        RefreshMgt.RefreshProfitability(PeriodFilter, Snapshot, TopOverruns, Groups, ChartJson);
 
         Rec.Reset();
         Rec.DeleteAll();
@@ -175,9 +169,6 @@ page 50013 "MBS PV Profit Dashboard"
         LastChartJson := ChartJson;
         RenderChart();
         CurrPage.Update(false);
-
-        ElapsedMs := CurrentDateTime() - StartedAt;
-        Runner.LogRefresh(Enum::"MBS PV Dashboard Type"::Profitability, ElapsedMs, RowsRead, Snapshot);
     end;
 
     /// <summary>Renders only when the add-in is ready and a chart exists, in either arrival order. Also replays after the add-in is recreated.</summary>

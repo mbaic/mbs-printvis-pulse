@@ -3,8 +3,6 @@ namespace MBS.PrintVisPulse.Pages;
 using MBS.PrintVisPulse.Buffers;
 using MBS.PrintVisPulse.Calculators;
 using MBS.PrintVisPulse.Enums;
-using MBS.PrintVisPulse.Readers;
-using Microsoft.Finance.GeneralLedger.Setup;
 
 /// <summary>
 /// Sales dashboard host. Owns the period filter, the explicit Refresh action and the status header.
@@ -119,6 +117,17 @@ page 50011 "MBS PV Sales Dashboard"
                 end;
             }
         }
+        area(Navigation)
+        {
+            action(CollectDataInfo)
+            {
+                ApplicationArea = All;
+                Caption = 'Collect Data Info';
+                Image = Report;
+                RunObject = page "MBS PV Data Info";
+                ToolTip = 'Profiles the PrintVis tables and dates so the data can be checked against the dashboard rules.';
+            }
+        }
         area(Promoted)
         {
             actionref(Refresh_Promoted; Refresh)
@@ -140,28 +149,13 @@ page 50011 "MBS PV Sales Dashboard"
 
     local procedure RefreshDashboard()
     var
-        Runner: Codeunit "MBS PV Reader Runner";
-        PeriodMgt: Codeunit "MBS PV Period Mgt";
-        Calculator: Codeunit "MBS PV Sales Calculator";
-        InputRows: Record "MBS PV Quote Input Buffer" temporary;
+        RefreshMgt: Codeunit "MBS PV Refresh Mgt";
         Snapshot: Record "MBS PV Snapshot Buffer" temporary;
         TopQuotes: Record "MBS PV Open Quote Row" temporary;
         Groups: Record "MBS PV Chart Group Buffer" temporary;
-        StartedAt: DateTime;
-        BusinessDate: Date;
-        FromDate: Date;
-        ToDate: Date;
-        ElapsedMs: Integer;
-        RowsRead: Integer;
-        SourceAvailable: Boolean;
         ChartJson: Text;
     begin
-        StartedAt := CurrentDateTime();
-        BusinessDate := WorkDate();
-        PeriodMgt.GetRange(PeriodFilter, BusinessDate, FromDate, ToDate);
-
-        SourceAvailable := Runner.ReadSales(FromDate, ToDate, InputRows, RowsRead);
-        Calculator.Calculate(InputRows, FromDate, ToDate, BusinessDate, StartedAt, GetBaseCurrencyCode(), SourceAvailable, Snapshot, TopQuotes, Groups, ChartJson);
+        RefreshMgt.RefreshSales(PeriodFilter, Snapshot, TopQuotes, Groups, ChartJson);
 
         Rec.Reset();
         Rec.DeleteAll();
@@ -175,9 +169,6 @@ page 50011 "MBS PV Sales Dashboard"
         LastChartJson := ChartJson;
         RenderChart();
         CurrPage.Update(false);
-
-        ElapsedMs := CurrentDateTime() - StartedAt;
-        Runner.LogRefresh(Enum::"MBS PV Dashboard Type"::Sales, ElapsedMs, RowsRead, Snapshot);
     end;
 
     /// <summary>Renders only when the add-in is ready and a chart exists, in either arrival order. Also replays after the add-in is recreated.</summary>
@@ -185,14 +176,5 @@ page 50011 "MBS PV Sales Dashboard"
     begin
         if ChartReady and (LastChartJson <> '') then
             CurrPage.ChartHost.RenderBarChart(LastChartJson);
-    end;
-
-    local procedure GetBaseCurrencyCode(): Code[10]
-    var
-        GeneralLedgerSetup: Record "General Ledger Setup";
-    begin
-        GeneralLedgerSetup.SetLoadFields("LCY Code");
-        if GeneralLedgerSetup.Get() then
-            exit(GeneralLedgerSetup."LCY Code");
     end;
 }

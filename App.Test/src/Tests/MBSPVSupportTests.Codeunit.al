@@ -2,6 +2,7 @@ namespace MBS.PrintVisPulse.Test;
 
 using MBS.PrintVisPulse.Buffers;
 using MBS.PrintVisPulse.Calculators;
+using MBS.PrintVisPulse.Diagnostics;
 using MBS.PrintVisPulse.Enums;
 using System.TestLibraries.Utilities;
 
@@ -141,5 +142,40 @@ codeunit 50104 "MBS PV Support Tests"
         LibraryAssert.AreEqual('UNASSIGNED', Fixtures.ChartLabel(ChartJson, 0), 'Blank group code maps to UNASSIGNED.');
         LibraryAssert.AreEqual(15, Fixtures.ChartValue(ChartJson, 'series1', 0), 'Series 1 total.');
         LibraryAssert.AreEqual(5, Fixtures.ChartValue(ChartJson, 'series2', 0), 'Series 2 total.');
+    end;
+
+    [Test]
+    procedure RefreshWithoutBindingGivesUnavailableSnapshotsTest()
+    var
+        RefreshMgt: Codeunit "MBS PV Refresh Mgt";
+        Snapshot: Record "MBS PV Snapshot Buffer" temporary;
+        TopQuotes: Record "MBS PV Open Quote Row" temporary;
+        TopRisks: Record "MBS PV Prod Risk Row" temporary;
+        TopOverruns: Record "MBS PV Profit Overrun Row" temporary;
+        Groups: Record "MBS PV Chart Group Buffer" temporary;
+        ChartJson: Text;
+    begin
+        // [SCENARIO] With no PrintVis binding every dashboard refresh ends in an Unavailable snapshot, never in an error
+        RefreshMgt.RefreshSales(Enum::"MBS PV Period Filter"::Last30Days, Snapshot, TopQuotes, Groups, ChartJson);
+        LibraryAssert.AreEqual(Enum::"MBS PV KPI Availability"::Unavailable, Snapshot."KPI 1 Availability", 'Sales should be unavailable.');
+
+        RefreshMgt.RefreshProduction(Enum::"MBS PV Period Filter"::Last30Days, Snapshot, TopRisks, Groups, ChartJson);
+        LibraryAssert.AreEqual(Enum::"MBS PV KPI Availability"::Unavailable, Snapshot."KPI 2 Availability", 'Production should be unavailable.');
+
+        RefreshMgt.RefreshProfitability(Enum::"MBS PV Period Filter"::Last30Days, Snapshot, TopOverruns, Groups, ChartJson);
+        LibraryAssert.AreEqual(Enum::"MBS PV KPI Availability"::Unavailable, Snapshot."KPI 3 Availability", 'Profitability should be unavailable.');
+    end;
+
+    [Test]
+    procedure DataInfoReportRunsWithoutPrintVisTest()
+    var
+        DataInfo: Codeunit "MBS PV Data Info";
+        ReportText: Text;
+    begin
+        // [SCENARIO] The data info report works on a tenant without PrintVis and says which tables are missing
+        ReportText := DataInfo.Collect();
+
+        LibraryAssert.IsTrue(ReportText.Contains('MBS PrintVis Pulse data info'), 'The report has a header.');
+        LibraryAssert.IsTrue(ReportText.Contains('Table "PVS Case" was not found.'), 'A missing table is reported, not raised.');
     end;
 }

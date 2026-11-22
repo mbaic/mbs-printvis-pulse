@@ -14,7 +14,15 @@ page 50010 "MBS PV Pulse Role Center"
     {
         area(RoleCenter)
         {
-            systempart(MyNotes; MyNotes)
+            part(SalesOverview; "MBS PV Sales Overview")
+            {
+                ApplicationArea = All;
+            }
+            part(ProductionOverview; "MBS PV Prod Overview")
+            {
+                ApplicationArea = All;
+            }
+            part(ProfitabilityOverview; "MBS PV Profit Overview")
             {
                 ApplicationArea = All;
             }
@@ -48,6 +56,17 @@ page 50010 "MBS PV Pulse Role Center"
                     Caption = 'Job Profitability';
                     RunObject = page "MBS PV Profit Dashboard";
                     ToolTip = 'Opens the job profitability dashboard.';
+                }
+            }
+            group(Diagnostics)
+            {
+                Caption = 'Diagnostics';
+                action(CollectDataInfo)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Collect Data Info';
+                    RunObject = page "MBS PV Data Info";
+                    ToolTip = 'Profiles the PrintVis tables and dates so the data can be checked against the dashboard rules.';
                 }
             }
         }
