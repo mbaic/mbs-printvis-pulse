@@ -16,6 +16,7 @@ codeunit 50027 "MBS PV Data Info"
 
     var
         TableNotFoundLbl: Label 'Table "%1" was not found.', Locked = true;
+        OtherValuesTxt: Label '(other values)', Locked = true;
         TableFailedLbl: Label 'Table %1 could not be profiled: %2', Locked = true;
 
     procedure Collect(): Text
@@ -29,6 +30,11 @@ codeunit 50027 "MBS PV Data Info"
         ProfileByName(Output, 'PVS Job Planning Unit');
         ProfileByName(Output, 'PVS Job Costing Entry');
         ProfileByName(Output, 'PVS Job Costing Labor Entry');
+        ProfileByName(Output, 'PVS Job');
+        ProfileByName(Output, 'PVS Job Shipment');
+        ProfileByName(Output, 'PVS Job Calculation Unit');
+        ProfileByName(Output, 'PVS Job Process');
+        ProfileByName(Output, 'PVS Quote Probability');
         exit(Output.ToText());
     end;
 
@@ -204,7 +210,9 @@ codeunit 50027 "MBS PV Data Info"
                         TrackDecimal(FldRef.Number, DecimalValue, MinDecimals, MaxDecimals, Counts);
                 end;
             FieldType::Boolean,
-            FieldType::Option:
+            FieldType::Option,
+            FieldType::Integer,
+            FieldType::Code:
                 TrackValue(FldRef.Number, Format(FldRef.Value), Distribution);
         end;
     end;
@@ -256,7 +264,12 @@ codeunit 50027 "MBS PV Data Info"
             ValueCounts.Set(ValueText, ValueCounts.Get(ValueText) + 1)
         else
             if ValueCounts.Count() < 15 then
-                ValueCounts.Add(ValueText, 1);
+                ValueCounts.Add(ValueText, 1)
+            else
+                if ValueCounts.ContainsKey(OtherValuesTxt) then
+                    ValueCounts.Set(OtherValuesTxt, ValueCounts.Get(OtherValuesTxt) + 1)
+                else
+                    ValueCounts.Add(OtherValuesTxt, 1);
 
         if Distribution.ContainsKey(FieldNo) then
             Distribution.Set(FieldNo, ValueCounts)
@@ -281,7 +294,9 @@ codeunit 50027 "MBS PV Data Info"
                     Output.AppendLine(StrSubstNo('DECIMAL %1 | non-zero %2 | %3 .. %4',
                         FldRef.Name, Counts.Get(FldRef.Number), Format(MinDecimals.Get(FldRef.Number), 0, 9), Format(MaxDecimals.Get(FldRef.Number), 0, 9)));
             FieldType::Boolean,
-            FieldType::Option:
+            FieldType::Option,
+            FieldType::Integer,
+            FieldType::Code:
                 if Distribution.ContainsKey(FldRef.Number) then begin
                     ValueCounts := Distribution.Get(FldRef.Number);
                     Line := '';
