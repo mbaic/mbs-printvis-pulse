@@ -1,5 +1,6 @@
 namespace MBS.PrintVisPulse.Permissions;
 
+using MBS.PrintVisPulse.Binding;
 using MBS.PrintVisPulse.Buffers;
 using MBS.PrintVisPulse.Calculators;
 using MBS.PrintVisPulse.Diagnostics;
@@ -44,6 +45,7 @@ permissionset 50050 "MBS PV Pulse Users"
         codeunit "MBS PV Display Mgt" = X,
         codeunit "MBS PV Refresh Mgt" = X,
         codeunit "MBS PV Data Info" = X,
+        codeunit "MBS PV PrintVis Binding" = X,
         codeunit "MBS PV Sales Reader" = X,
         codeunit "MBS PV Prod Reader" = X,
         codeunit "MBS PV Profit Reader" = X,
