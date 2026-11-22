@@ -11,7 +11,7 @@ codeunit 50201 "MBS PV Demo Writer"
     var
         RecRef: RecordRef;
         InsertedCount: Integer;
-        InsertFailedErr: Label 'Could not insert the demo record into %1 (%2).', Comment = '%1 = table caption, %2 = record position';
+        InsertFailedErr: Label 'Could not insert the demo record into table %1 (%2).', Comment = '%1 = table caption, %2 = record position';
 
     procedure StartRecord(TableNo: Integer)
     begin
@@ -60,7 +60,7 @@ codeunit 50201 "MBS PV Demo Writer"
         KeyText: Text;
     begin
         if not RecRef.Insert(false) then
-            Error(InsertFailedErr, RecRef.Caption(), RecRef.GetPosition());
+            Error(InsertFailedErr, Format(RecRef.Number()), Format(RecRef.RecordId));
 
         PrimaryKey := RecRef.KeyIndex(1);
         for i := 1 to PrimaryKey.FieldCount() do begin
@@ -71,7 +71,7 @@ codeunit 50201 "MBS PV Demo Writer"
 
         DemoLog.Init();
         DemoLog."Table No." := RecRef.Number();
-        DemoLog."Table Name" := CopyStr(RecRef.Name(), 1, MaxStrLen(DemoLog."Table Name"));
+        DemoLog."Table Name" := CopyStr(RecRef.Name, 1, MaxStrLen(DemoLog."Table Name"));
         DemoLog."Source SystemId" := RecRef.Field(RecRef.SystemIdNo()).Value;
         DemoLog."Record Key" := CopyStr(KeyText, 1, MaxStrLen(DemoLog."Record Key"));
         DemoLog."Created At" := CurrentDateTime();
