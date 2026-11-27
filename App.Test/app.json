@@ -2,7 +2,7 @@
   "id": "7a5f5945-cfe1-4beb-bd85-80fef5ffa73e",
   "name": "MBS PrintVis Pulse Test",
   "publisher": "MBS",
-  "version": "28.0.0.0",
+  "version": "28.1.0.0",
   "brief": "Unit tests for MBS PrintVis Pulse",
   "description": "Automated unit tests for the MBS PrintVis Pulse calculators and support codeunits.",
   "privacyStatement": "",
@@ -27,7 +27,7 @@
       "id": "adcbcd70-3554-414e-8fcd-a1079806c044",
       "name": "MBS PrintVis Pulse",
       "publisher": "MBS",
-      "version": "28.0.0.0"
+      "version": "28.1.0.0"
     }
   ],
   "screenshots": [],

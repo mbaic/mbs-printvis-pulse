@@ -2,7 +2,7 @@
   "id": "3c1f8f0e-5b0a-4f0e-9d3e-7b6f4d2a9c11",
   "name": "MBS PrintVis Pulse Dataset",
   "publisher": "MBS",
-  "version": "28.0.0.0",
+  "version": "28.1.0.0",
   "brief": "Demo data for MBS PrintVis Pulse",
   "description": "Creates a small, logged set of PrintVis cases, jobs, operations, shipments and costing entries so the Pulse dashboards load, and removes it again in one run.",
   "privacyStatement": "",

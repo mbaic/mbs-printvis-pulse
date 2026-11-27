@@ -9,5 +9,6 @@
   "testFolders": [
     "App.Test"
   ],
-  "bcptTestFolders": []
+  "bcptTestFolders": [],
+  "repoVersion": "1.1"
 }
